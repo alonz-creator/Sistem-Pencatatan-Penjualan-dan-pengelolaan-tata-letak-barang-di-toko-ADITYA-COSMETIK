@@ -1,0 +1,12 @@
+[
+  { "id": 1, "customer": "Andi Pratama", "product": "Lipstik Matte", "total": "Rp 85.000", "status": "Selesai", "tags": ["Kosmetik", "Bibir"] },
+  { "id": 2, "customer": "Sari Dewi", "product": "Foundation SPF 30", "total": "Rp 210.000", "status": "Diproses", "tags": ["Kosmetik", "Wajah"] },
+  { "id": 3, "customer": "Budi Santoso", "product": "Serum Vitamin C", "total": "Rp 175.000", "status": "Selesai", "tags": ["Skincare", "Wajah"] },
+  { "id": 4, "customer": "Nina Permata", "product": "Eyeshadow Palette", "total": "Rp 320.000", "status": "Dibatalkan", "tags": ["Kosmetik", "Mata"] },
+  { "id": 5, "customer": "Rina Aulia", "product": "Pelembab Wajah", "total": "Rp 95.000", "status": "Diproses", "tags": ["Skincare", "Wajah"] },
+  { "id": 6, "customer": "Dian Kusuma", "product": "Blush On Natural", "total": "Rp 130.000", "status": "Selesai", "tags": ["Kosmetik", "Wajah"] },
+  { "id": 7, "customer": "Fajar Nugroho", "product": "Toner Hydrating", "total": "Rp 145.000", "status": "Diproses", "tags": ["Skincare", "Wajah"] },
+  { "id": 8, "customer": "Lestari Indah", "product": "Maskara Volume", "total": "Rp 78.000", "status": "Selesai", "tags": ["Kosmetik", "Mata"] },
+  { "id": 9, "customer": "Hendra Wijaya", "product": "Sunscreen SPF 50", "total": "Rp 190.000", "status": "Dibatalkan", "tags": ["Skincare", "Perlindungan"] },
+  { "id": 10, "customer": "Maya Sari", "product": "Lip Gloss Berry", "total": "Rp 65.000", "status": "Selesai", "tags": ["Kosmetik", "Bibir"] }
+]

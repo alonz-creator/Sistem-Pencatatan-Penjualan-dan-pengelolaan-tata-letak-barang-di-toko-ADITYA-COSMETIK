@@ -1,0 +1,12 @@
+[
+  { "id": 1, "name": "Andi Pratama", "email": "andi@email.com", "phone": "081234567890", "totalBelanja": "Rp 425.000", "tags": ["Member", "Reguler"] },
+  { "id": 2, "name": "Sari Dewi", "email": "sari@email.com", "phone": "082345678901", "totalBelanja": "Rp 1.250.000", "tags": ["Member", "VIP"] },
+  { "id": 3, "name": "Budi Santoso", "email": "budi@email.com", "phone": "083456789012", "totalBelanja": "Rp 310.000", "tags": ["Non-Member", "Reguler"] },
+  { "id": 4, "name": "Nina Permata", "email": "nina@email.com", "phone": "084567890123", "totalBelanja": "Rp 840.000", "tags": ["Member", "VIP"] },
+  { "id": 5, "name": "Rina Aulia", "email": "rina@email.com", "phone": "085678901234", "totalBelanja": "Rp 215.000", "tags": ["Non-Member", "Reguler"] },
+  { "id": 6, "name": "Dian Kusuma", "email": "dian@email.com", "phone": "086789012345", "totalBelanja": "Rp 980.000", "tags": ["Member", "VIP"] },
+  { "id": 7, "name": "Fajar Nugroho", "email": "fajar@email.com", "phone": "087890123456", "totalBelanja": "Rp 145.000", "tags": ["Non-Member", "Reguler"] },
+  { "id": 8, "name": "Lestari Indah", "email": "lestari@email.com", "phone": "088901234567", "totalBelanja": "Rp 560.000", "tags": ["Member", "Reguler"] },
+  { "id": 9, "name": "Hendra Wijaya", "email": "hendra@email.com", "phone": "089012345678", "totalBelanja": "Rp 390.000", "tags": ["Member", "Reguler"] },
+  { "id": 10, "name": "Maya Sari", "email": "maya@email.com", "phone": "080123456789", "totalBelanja": "Rp 1.100.000", "tags": ["Member", "VIP"] }
+]

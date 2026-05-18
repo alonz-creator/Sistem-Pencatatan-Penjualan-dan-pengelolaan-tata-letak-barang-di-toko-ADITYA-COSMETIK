@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ipos-biru: #2a52f4;
+  --color-ipos-gelap: #101c87;
+  --color-ipos-abu: #f3f4f6;
+  --color-teks-utama: #1f2937;
+  --color-teks-pudar: #6b7280;
+}
+
+body {
+  background-color: var(--color-ipos-abu);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
