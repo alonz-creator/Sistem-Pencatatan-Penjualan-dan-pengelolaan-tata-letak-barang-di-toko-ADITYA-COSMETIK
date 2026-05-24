@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+gemini.md
+modul-implementasi1.md
+modul-implementasi2.md
+modul-implementasi1.docx
+modul-implementasi2.docx
+aturan-project.docx
+aturan-project.md
 
 # Editor directories and files
 .vscode/*

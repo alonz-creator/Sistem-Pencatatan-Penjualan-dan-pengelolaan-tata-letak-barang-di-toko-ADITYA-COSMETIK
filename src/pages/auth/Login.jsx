@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import toast from 'react-hot-toast';
 import axios from "axios";
 import { BsFillExclamationDiamondFill } from "react-icons/bs";
 import { ImSpinner2 } from "react-icons/im";
@@ -37,6 +38,8 @@ export default function Login() {
                     setError(response.data.message);
                     return;
                 }
+                localStorage.setItem('user', JSON.stringify(response.data));
+                toast.success('Login berhasil! Selamat datang.');
                 navigate("/dashboard");
             })
             .catch((err) => {
@@ -110,7 +113,7 @@ export default function Login() {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-4 rounded-lg transition duration-300"
+                    className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer text-white font-semibold py-2.5 px-4 rounded-lg transition duration-300"
                 >
                     {loading ? "Memproses..." : "Login"}
                 </button>

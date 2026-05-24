@@ -1,5 +1,29 @@
-// DashboardLayout dihapus — sekarang sudah ditangani oleh MainLayout via <Outlet/>
+import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
+const dataChart = [
+  { name: 'Jan', sales: 11000000 },
+  { name: 'Feb', sales: 16500000 },
+  { name: 'Mar', sales: 22000000 },
+  { name: 'Apr', sales: 18000000 },
+  { name: 'Mei', sales: 24000000 },
+  { name: 'Jun', sales: 21000000 },
+];
+
 const Dashboard = () => {
+    const [laba, setLaba] = useState(2450000);
+
+    useEffect(() => {
+        // Simulasi Real-time Dashboard Update (US11) & Notifikasi Sistem (US12)
+        const interval = setInterval(() => {
+            setLaba(prev => prev + 150000);
+            toast('Pesanan baru masuk!', { icon: '🛒', style: { borderRadius: '10px', background: '#4F46E5', color: '#fff' }});
+        }, 30000); // 30 detik sekali
+
+        return () => clearInterval(interval);
+    }, []);
+
     const transactions = [
         { id: 'TRX-001234', name: 'Siti Rahmawati', eco: true, total: 'Rp 450.000', status: 'Selesai' },
         { id: 'TRX-001235', name: 'Ahmad Fauzi', eco: false, total: 'Rp 280.000', status: 'Selesai' },
@@ -14,7 +38,7 @@ const Dashboard = () => {
                 <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex justify-between items-center">
                     <div>
                         <p className="text-sm text-gray-500 mb-1">Laba Hari Ini</p>
-                        <h2 className="text-2xl font-bold text-gray-800">Rp 2.450.000</h2>
+                        <h2 className="text-2xl font-bold text-gray-800">Rp {(laba).toLocaleString()}</h2>
                     </div>
                     <div className="w-10 h-10 rounded-lg bg-green-50 text-green-500 flex items-center justify-center">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
@@ -52,43 +76,28 @@ const Dashboard = () => {
                 <div className="col-span-2 bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
                     <h3 className="font-semibold text-gray-800 mb-6">Tren Penjualan Bulanan</h3>
                     <div className="relative h-64 w-full flex flex-col pb-6">
-                        <div className="absolute inset-0 left-16 right-0 bottom-6 flex flex-col justify-between">
-                            <div className="border-b border-dashed border-gray-200 w-full h-0"></div>
-                            <div className="border-b border-dashed border-gray-200 w-full h-0"></div>
-                            <div className="border-b border-dashed border-gray-200 w-full h-0"></div>
-                            <div className="border-b border-dashed border-gray-200 w-full h-0"></div>
-                            <div className="border-b border-gray-300 w-full h-0"></div>
-                        </div>
-                        <div className="relative flex-1 flex">
-                            <div className="w-16 flex flex-col justify-between text-xs text-gray-400 text-right pr-4 z-10 pb-[-10px]">
-                                <span>22000000</span>
-                                <span>16500000</span>
-                                <span>11000000</span>
-                                <span>5500000</span>
-                                <span>0</span>
-                            </div>
-                            <div className="flex-1 flex justify-around items-end z-10 px-4">
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[45%]"></div>
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[55%]"></div>
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[70%]"></div>
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[60%]"></div>
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[80%]"></div>
-                                <div className="w-[12%] max-w-12.5 bg-[#5c54f5] rounded-t-md h-[75%]"></div>
-                            </div>
-                        </div>
-                        <div className="ml-16 flex justify-around text-xs text-gray-400 pt-3 px-4">
-                            <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>Mei</span><span>Jun</span>
-                        </div>
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={dataChart} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
+                                <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} tickFormatter={(value) => `Rp ${value / 1000000}M`} />
+                                <Tooltip
+                                    cursor={{ fill: '#F3F4F6' }}
+                                    formatter={(value) => [`Rp ${value.toLocaleString()}`, 'Penjualan']}
+                                />
+                                <Bar dataKey="sales" fill="#5c54f5" radius={[4, 4, 0, 0]} barSize={40} />
+                            </BarChart>
+                        </ResponsiveContainer>
                     </div>
                 </div>
                 <div className="col-span-1 bg-white rounded-xl p-6 border border-gray-100 shadow-sm flex flex-col">
                     <h3 className="font-semibold text-gray-800 mb-6">Aksi Cepat</h3>
                     <div className="flex gap-4">
-                        <button className="flex-1 bg-[#5c54f5] hover:bg-indigo-700 text-white rounded-xl flex flex-col items-center justify-center py-1 px-2 transition-colors shadow-sm">
+                        <button className="flex-1 bg-[#5c54f5] hover:bg-indigo-700 text-white rounded-xl flex flex-col items-center justify-center py-1 px-2 transition-colors shadow-sm cursor-pointer" onClick={() => toast.success('Membuka modal tambah stok...')}>
                             <span className="text-3xl font-light mb-1">+</span>
                             <span className="text-sm font-medium text-center">Tambah<br />Stok Baru</span>
                         </button>
-                        <button className="flex-1 bg-[#059669] hover:bg-emerald-700 text-white rounded-xl flex flex-col items-center justify-center py-1 px-2 transition-colors shadow-sm">
+                        <button className="flex-1 bg-[#059669] hover:bg-emerald-700 text-white rounded-xl flex flex-col items-center justify-center py-1 px-2 transition-colors shadow-sm cursor-pointer" onClick={() => toast.success('Memuat sistem POS...')}>
                             <svg className="w-7 h-7 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                             <span className="text-sm font-medium text-center">Buka Kasir<br />POS</span>
                         </button>

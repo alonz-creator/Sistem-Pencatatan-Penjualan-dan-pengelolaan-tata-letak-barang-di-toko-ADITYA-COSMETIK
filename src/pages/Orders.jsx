@@ -1,7 +1,40 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import ordersData from '../data/orders.json';
+import InputField from '../components/InputField';
 
 const Orders = () => {
+  const [orders, setOrders] = useState(ordersData);
+  const [orderForm, setOrderForm] = useState({
+    customer: '',
+    product: '',
+    price: 0,
+    quantity: 1,
+  });
+
+  const handleOrderChange = (evt) => {
+    const { name, value } = evt.target;
+    setOrderForm({
+      ...orderForm,
+      [name]: value,
+    });
+  };
+
+  const handleAddOrder = (e) => {
+    e.preventDefault();
+    if (!orderForm.customer || !orderForm.product) return;
+    const newOrder = {
+      id: `TRX-${Math.floor(Math.random() * 10000)}`,
+      customer: orderForm.customer,
+      product: orderForm.product,
+      total: `Rp ${(orderForm.price * orderForm.quantity).toLocaleString()}`,
+      status: 'Selesai',
+      tags: ['Baru']
+    };
+    setOrders([newOrder, ...orders]);
+    setOrderForm({ customer: '', product: '', price: 0, quantity: 1 });
+    toast.success('Transaksi berhasil disimpan!');
+  };
   const [dataForm, setDataForm] = useState({
     searchTerm: '',
     selectedTag: '',
@@ -14,7 +47,7 @@ const Orders = () => {
     });
   };
   const _searchTerm = dataForm.searchTerm.toLowerCase();
-  const filteredOrders = ordersData.filter((order) => {
+  const filteredOrders = orders.filter((order) => {
     const matchesSearch =
       order.customer.toLowerCase().includes(_searchTerm) ||
       order.product.toLowerCase().includes(_searchTerm);
@@ -25,7 +58,7 @@ const Orders = () => {
 
     return matchesSearch && matchesTag;
   });
-  const allTags = [...new Set(ordersData.flatMap((order) => order.tags))];
+  const allTags = [...new Set(orders.flatMap((order) => order.tags))];
   const statusColor = (status) => {
     if (status === 'Selesai') return 'bg-green-100 text-green-700';
     if (status === 'Diproses') return 'bg-yellow-100 text-yellow-700';
@@ -35,8 +68,31 @@ const Orders = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-800 mb-1">Orders</h1>
-      <p className="text-sm text-gray-500 mb-6">Daftar seluruh transaksi penjualan</p>
+      <h1 className="text-2xl font-bold text-gray-800 mb-1">Input Penjualan & Orders</h1>
+      <p className="text-sm text-gray-500 mb-6">Kelola data transaksi dan input penjualan baru</p>
+      
+      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-8">
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Tambah Transaksi Baru</h2>
+        <form onSubmit={handleAddOrder} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField label="Nama Pelanggan" name="customer" value={orderForm.customer} onChange={handleOrderChange} placeholder="Masukkan nama pelanggan" />
+          <InputField label="Nama Produk" name="product" value={orderForm.product} onChange={handleOrderChange} placeholder="Masukkan nama produk" />
+          <InputField label="Harga Satuan" type="number" name="price" value={orderForm.price} onChange={handleOrderChange} placeholder="Contoh: 15000" />
+          <InputField label="Jumlah" type="number" name="quantity" value={orderForm.quantity} onChange={handleOrderChange} placeholder="1" />
+          
+          <div className="md:col-span-2 p-4 bg-indigo-50 rounded-lg flex justify-between items-center">
+            <span className="text-gray-700 font-medium">Total Harga:</span>
+            <span className="text-xl font-bold text-[#4F46E5]">Rp {(orderForm.price * orderForm.quantity).toLocaleString()}</span>
+          </div>
+          
+          <div className="md:col-span-2">
+            <button type="submit" className="w-full bg-[#4F46E5] text-white p-2 rounded-lg font-medium hover:bg-indigo-700 transition cursor-pointer">
+              Simpan Transaksi
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <h2 className="text-lg font-bold text-gray-800 mb-4">Daftar Transaksi</h2>
       <input
         type="text"
         name="searchTerm"
