@@ -27,6 +27,7 @@ const Customers = () => {
   });
   const allTags = [...new Set(customersData.flatMap((customer) => customer.tags))];
 
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-800 mb-1">Data Pelanggan</h1>
